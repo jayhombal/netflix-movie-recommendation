@@ -46,7 +46,7 @@ clean:
 	find . -type f -name "*.py[co]" -delete
 	find . -type d -name "__pycache__" -delete
 
-# Delete raw data files
+# Delete raw data files 
 clean/raw:
 	rm -rf data/raw
 
@@ -79,6 +79,7 @@ else
 endif
 
 ## Set up python interpreter environment
+# Note: Delete environment.lock file if it already exists before running the create_environment step
 create_environment:
 ifneq ("X$(wildcard ./environment.lock)","X")
 	conda env create --name $(PROJECT_NAME) python=3.8 -f environment.lock
@@ -86,6 +87,8 @@ else
 	@echo ">>> Creating lockfile from conda environment specification."
 	conda env create --name $(PROJECT_NAME) python=3.8 -f environment.yml
 	conda env export --name $(PROJECT_NAME) | grep -v "prefix:" > environment.lock
+	# create the data folders if the not exist
+	mkdir -p data/raw data/processed data/external data/interim
 endif
 	@echo ">>> New conda env created. Activate with: 'conda activate $(PROJECT_NAME)'"
 
@@ -108,7 +111,7 @@ data/raw:
 	mkdir -p $@
 	kaggle datasets download -d netflix-inc/netflix-prize-data
 	mv netflix-prize-data.zip data/external
-	unzip data/external/netflix-prize-data.zip -d data/raw
+	unzip data/external/netflix-prize-data.zip -d data/raw/
 
 ## Run generic processing and cleanup scripts to produce interim data
 data/interim: data/raw
