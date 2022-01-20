@@ -46,8 +46,8 @@ clean:
 	find . -type f -name "*.py[co]" -delete
 	find . -type d -name "__pycache__" -delete
 
+# Delete raw data files
 clean/raw:
-	#find data/raw -type f -name "*.csv" -delete
 	rm -rf data/raw
 
 
