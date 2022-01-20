@@ -1,0 +1,22 @@
+name: netflix-movie-recommendation
+dependencies:
+  - flake8
+  - pip
+  - setuptools
+  - wheel
+  - pandas
+  - scikit-learn
+  - click
+  - Sphinx
+  - pytest
+  - black
+  - jupyterlab
+  - nbconvert
+  - pip:
+      - awscli
+      - kaggle
+      - python-dotenv
+      - pytest-sugar
+      - pytest-cov
+      - -e .
+  - python>=3.6
