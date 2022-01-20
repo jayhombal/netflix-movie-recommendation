@@ -5,6 +5,9 @@ __pycache__/
 # C extensions
 *.so
 
+# add environment lock files
+environment.lock
+
 # Distribution / packaging
 .Python
 env/
